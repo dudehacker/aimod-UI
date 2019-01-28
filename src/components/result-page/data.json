@@ -1,4 +1,8 @@
 {
+  "title":"Title",
+  "artist":"Artist",
+  "mapper": "mapper",
+  "url":"https://google.com",
   "tabs": [
     {
       "name": "All",
@@ -16,6 +20,26 @@
     {
       "name": "EZ",
       "comments": [
+        {
+          "time":"00:00:230",
+          "text":"inconsistent hitsound",
+          "type":"warning"
+        },
+        {
+          "time":"00:00:430",
+          "text":"inconsistent hitsound",
+          "type":"warning"
+        },
+        {
+          "time":"00:00:670",
+          "text":"muted hitsound",
+          "type":"problem"
+        },
+        {
+          "time":"00:00:930",
+          "text":"inconsistent hitsound",
+          "type":"warning"
+        },
         {
           "time":"00:00:230",
           "text":"inconsistent hitsound",

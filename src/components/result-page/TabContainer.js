@@ -45,16 +45,28 @@ class SimpleTabs extends React.Component {
 
     return (
       <div className={classes.root}>
+        <header style={{position: "fixed", top:"0", width: "100%"}}>
         <AppBar position="static">
-          <Tabs value={value} onChange={this.handleChange}>
+          <Tabs value={value}
+          onChange={this.handleChange}
+          variant="scrollable"
+          scrollButtons="auto"
+          >
             {this.props.data.tabs.map( function(tab, index) {
               return <Tab key={index} label= {<Badge className={classes.padding} color="secondary" badgeContent={tab.comments.length}>{tab.name}</Badge>} />;
             } )}
           </Tabs>
         </AppBar>
+        <div style={{margin: "auto", width: "50%", textAlign: "center", paddingTop: "2em"}}>
+          <a href={this.props.data.url}><h3>{this.props.data.artist} - {this.props.data.title}</h3></a>
+          <h4>{this.props.data.mapper}</h4>
+        </div>
+        </header>
+        <div style={{marginTop: "70px"}}>
         <TabContainer>
           <TabContent data={this.props.data.tabs[value]}></TabContent>
         </TabContainer>
+        </div>
       </div>
     );
   }
