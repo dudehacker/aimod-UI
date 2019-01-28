@@ -1,40 +1,67 @@
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import "react-tabs/style/react-tabs.css";
-import Comment from './Comment'
-import React, {Fragment} from 'react'
-import {Timeline} from 'vertical-timeline-component-for-react';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Typography from '@material-ui/core/Typography';
+import React from 'react'
+import Badge from '@material-ui/core/Badge';
+import TabContent from './TabContent';
 
-const TabContainer = (props) => {
-      return (
-        <Fragment>
-  <Tabs onSelect={tabSelected}>
-    <TabList>
-      <Tab>Title 1</Tab>
-      <Tab>Title 2</Tab>
-    </TabList>
-
-    <TabPanel>
-      <Timeline lineColor={'#ddd'}>
-        <Comment id="1" time="00:00:230" text="inconsistent hitsound" type="warning"/>
-        <Comment id="2" time="00:00:430" text="inconsistent hitsound" type="warning"/>
-        <Comment id="3" time="00:00:670" text="muted hitsound" type="problem"/>
-        <Comment id="4" time="00:00:930" text="inconsistent hitsound" type="warning"/>
-      </Timeline>
-    </TabPanel>
-    <TabPanel>
-      <h2>Any content 2</h2>
-    </TabPanel>
-  </Tabs>
-
-
-
-</Fragment>
-
-      );
+function TabContainer(props) {
+  return (
+    <Typography component="div" style={{ padding: 8 * 3 }}>
+      {props.children}
+    </Typography>
+  );
 }
 
-const tabSelected = (index, lastIndex, event) => {
-  console.log(index + " " + lastIndex);
+TabContainer.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+const styles = theme => ({
+  root: {
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.paper,
+  },
+  padding: {
+    padding: `0 ${theme.spacing.unit * 2}px`,
+  },
+});
+
+class SimpleTabs extends React.Component {
+  state = {
+    value: 0,
+  };
+
+  handleChange = (event, value) => {
+    this.setState({ value });
+  };
+
+  render() {
+    const { classes } = this.props;
+    const { value } = this.state;
+
+    return (
+      <div className={classes.root}>
+        <AppBar position="static">
+          <Tabs value={value} onChange={this.handleChange}>
+            {this.props.data.tabs.map( function(tab, index) {
+              return <Tab key={index} label= {<Badge className={classes.padding} color="secondary" badgeContent={tab.comments.length}>{tab.name}</Badge>} />;
+            } )}
+          </Tabs>
+        </AppBar>
+        <TabContainer>
+          <TabContent data={this.props.data.tabs[value]}></TabContent>
+        </TabContainer>
+      </div>
+    );
+  }
 }
 
-export default TabContainer;
+SimpleTabs.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(SimpleTabs);

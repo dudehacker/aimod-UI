@@ -5,8 +5,7 @@ import PropTypes from 'prop-types';
 const Comment = (props) => {
   return (
     <TimelineItem
-      dateText={props.time}
-      key= {props.id}
+      dateText={props.time ? props.time : ""+(props.index+1)}
       style={{ color: getStyle(props.type) }}
       dateInnerStyle={{ background: getStyle(props.type), color: '#000' }}
       bodyContainerStyle={{
@@ -16,16 +15,18 @@ const Comment = (props) => {
         boxShadow: '0.5rem 0.5rem 2rem 0 rgba(0, 0, 0, 0.2)',
       }}
     >
-
+    {props.time ? (
       <a style={{color:'inherit'}}  href={formatLink(props.time)}>{props.text}</a>
+    ) : (
+      <p>{props.text}</p>
+    )}
     </TimelineItem>
 );
 };
 
 Comment.propTypes = {
-  id: PropTypes.any.isRequired,
   text: PropTypes.string.isRequired,
-  time: PropTypes.string.isRequired,
+  time: PropTypes.string,
   type: PropTypes.string.isRequired
 };
 
@@ -38,7 +39,7 @@ const getStyle = (type) => {
 }
 
 const formatLink = (text) => {
-  return "osu://edit/" + text;
+    return "osu://edit/" + text;
 }
 
 export default Comment;
