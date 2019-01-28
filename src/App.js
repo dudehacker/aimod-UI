@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import './App.css';
 import Home from './components/home-page/Home';
-
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import ResultsPage from './components/result-page/ResultsPage';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 
 class App extends Component {
   render() {
     return (
       <Router>
-          <Route path='/' component={Home} />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path='/results/' component={ResultsPage} />
+        </Switch>
       </Router>
     );
   }
