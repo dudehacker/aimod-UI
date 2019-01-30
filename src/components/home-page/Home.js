@@ -6,7 +6,7 @@ return (
   <Fragment>
     <header className="App-header">
       <Jumbotron />
-      <SearchBox />
+      <SearchBox history={props.history}/>
     </header>
   </Fragment>
 );

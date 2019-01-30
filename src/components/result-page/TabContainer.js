@@ -23,11 +23,24 @@ TabContainer.propTypes = {
 const styles = theme => ({
   root: {
     flexGrow: 1,
+    position: 'relative',
+    top: '50px',
     backgroundColor: theme.palette.background.paper,
   },
   padding: {
     padding: `0 ${theme.spacing.unit * 2}px`,
   },
+  header:{
+    margin: "auto",
+    width: "50%",
+    textAlign: "center",
+    paddingBottom: "2em",
+  },
+  tabs: {
+    margin: "auto",
+    width: "60%",
+    backgroundColor: "#6573c3"
+  }
 });
 
 class SimpleTabs extends React.Component {
@@ -45,24 +58,25 @@ class SimpleTabs extends React.Component {
 
     return (
       <div className={classes.root}>
-        <header style={{position: "fixed", top:"0", width: "100%"}}>
-        <AppBar position="static">
+        <header style={{margin: "auto"}}>
+        <div className={classes.header}>
+          <a href={this.props.data.url}><h3>{this.props.data.artist} - {this.props.data.title}</h3></a>
+          <h4>{this.props.data.mapper}</h4>
+        </div>
+        <AppBar position="static" className={classes.tabs}>
           <Tabs value={value}
           onChange={this.handleChange}
-          variant="scrollable"
-          scrollButtons="auto"
+          centered
+          // variant="scrollable" scrollButtons="auto"
           >
             {this.props.data.tabs.map( function(tab, index) {
               return <Tab key={index} label= {<Badge className={classes.padding} color="secondary" badgeContent={tab.comments.length}>{tab.name}</Badge>} />;
             } )}
           </Tabs>
-        </AppBar>
-        <div style={{margin: "auto", width: "50%", textAlign: "center", paddingTop: "2em"}}>
-          <a href={this.props.data.url}><h3>{this.props.data.artist} - {this.props.data.title}</h3></a>
-          <h4>{this.props.data.mapper}</h4>
-        </div>
+          </AppBar>
+
         </header>
-        <div style={{marginTop: "70px"}}>
+        <div>
         <TabContainer>
           <TabContent data={this.props.data.tabs[value]}></TabContent>
         </TabContainer>
