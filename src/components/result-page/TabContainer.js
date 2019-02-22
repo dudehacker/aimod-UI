@@ -66,8 +66,8 @@ class SimpleTabs extends React.Component {
         <AppBar position="static" className={classes.tabs}>
           <Tabs value={value}
           onChange={this.handleChange}
-          centered
-          // variant="scrollable" scrollButtons="auto"
+          // centered
+          variant="scrollable" scrollButtons="auto"
           >
             {this.props.data.tabs.map( function(tab, index) {
               return <Tab key={index} label= {<Badge className={classes.padding} color="secondary" badgeContent={tab.comments.length}>{tab.name}</Badge>} />;

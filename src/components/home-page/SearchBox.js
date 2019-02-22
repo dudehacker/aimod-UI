@@ -21,7 +21,6 @@ class SearchBox extends Component {
   };
 
   goToResults = res => {
-    console.log(res);
     this.props.history.push({
       pathname: `/results/${res.data.beatmapSetId}`,
       state: {
