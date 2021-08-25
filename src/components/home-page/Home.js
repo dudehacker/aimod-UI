@@ -1,12 +1,12 @@
 import React, {Fragment} from 'react';
-import SearchBox from './SearchBox'
+import UploadBox from './UploadBox';
 
 const Home = (props) => {
 return (
   <Fragment>
     <header className="App-header">
       <Jumbotron />
-      <SearchBox history={props.history}/>
+      <UploadBox history={props.history}/>
     </header>
   </Fragment>
 );
