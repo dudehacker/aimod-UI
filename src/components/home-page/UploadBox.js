@@ -48,9 +48,11 @@ class UploadBox extends Component {
     for (const key of Object.keys(this.state.files)) {
       formData.append("files", this.state.files[key]);
     }
+    var host = process.env.REACT_APP_HD_HOST
 
     axios
-      .post("http://localhost:8888/upload", formData)
+      .post(`${host}/upload`, formData)
+      // .post("http://localhost:8888/upload", formData)
       .then(this.goToResults)
       .catch(this.handleError);
   };

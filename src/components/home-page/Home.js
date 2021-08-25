@@ -1,6 +1,7 @@
 import React, {Fragment} from 'react';
 import UploadBox from './UploadBox';
 
+console.log(process.env.REACT_APP_HD_HOST)
 const Home = (props) => {
 return (
   <Fragment>
