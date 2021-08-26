@@ -9,7 +9,6 @@ const filterFiles = (files) => {
     let ext = file.name.split(".").pop();
     return ["wav", "ogg", "osu", "mp3"].includes(ext);
   });
-  console.log(files);
   return files;
 };
 
@@ -23,9 +22,7 @@ class UploadBox extends Component {
   }
 
   onChangeHandler = (event) => {
-    console.log(event.target.files);
     let folder = event.target.files[0].webkitRelativePath.split("/")[0]
-    console.log(folder)
     this.setState({
       files: filterFiles(event.target.files),
       folder: folder,
@@ -33,6 +30,7 @@ class UploadBox extends Component {
   };
 
   goToResults = (res) => {
+    console.log(res.data)
     this.props.history.push({
       pathname: `/results/${res.data.beatmapSetId}`,
       state: {
@@ -52,7 +50,6 @@ class UploadBox extends Component {
 
     axios
       .post(`${host}/upload`, formData)
-      // .post("http://localhost:8888/upload", formData)
       .then(this.goToResults)
       .catch(this.handleError);
   };

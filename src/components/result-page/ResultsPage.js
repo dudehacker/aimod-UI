@@ -7,7 +7,6 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
 const ResultsPage = (props) => {
-  console.log(props);
       return (
         <div>
         <AppBar position="static" style={{paddingTop: "1em", paddingBottom: "1em"}}>

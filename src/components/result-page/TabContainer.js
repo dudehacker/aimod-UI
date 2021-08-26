@@ -2,11 +2,11 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import React from 'react'
-import Badge from '@material-ui/core/Badge';
 import TabContent from './TabContent';
+import Tab from "@material-ui/core/Tab";
+import Badge from "@material-ui/core/Badge";
 
 function TabContainer(props) {
   return (
@@ -28,7 +28,7 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.paper,
   },
   padding: {
-    padding: `0 ${theme.spacing.unit * 2}px`,
+    padding: `0 ${theme.spacing(2) }px`,
   },
   header:{
     margin: "auto",
@@ -55,7 +55,7 @@ class SimpleTabs extends React.Component {
   render() {
     const { classes } = this.props;
     const { value } = this.state;
-
+    const hitsoundDiff = this.props.data.hitsoundDiff
     return (
       <div className={classes.root}>
         <header style={{margin: "auto"}}>
@@ -70,6 +70,9 @@ class SimpleTabs extends React.Component {
           variant="scrollable" scrollButtons="auto"
           >
             {this.props.data.tabs.map( function(tab, index) {
+              if (hitsoundDiff === tab.name){
+                return <Tab key={index} style={{background: "linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)"}} label= {<Badge className={classes.padding} color="secondary" badgeContent={tab.comments.length}>{tab.name}</Badge>} />;
+              }
               return <Tab key={index} label= {<Badge className={classes.padding} color="secondary" badgeContent={tab.comments.length}>{tab.name}</Badge>} />;
             } )}
           </Tabs>
